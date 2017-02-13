@@ -5,7 +5,7 @@ import de.eddyson.tapestrygeb.JettyGebSpec
 
 class ReactSelectSpec extends JettyGebSpec {
 
-  def "Simple load test"(){
+  def "Simple loading test"(){
     given:
     to ReactSelectDemo
     expect:
