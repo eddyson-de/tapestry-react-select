@@ -1,0 +1,88 @@
+plugins {
+    id "com.jfrog.bintray" version "1.7.3"
+}
+
+description = "Use React-Select together with Tapestry"
+
+group = "de.eddyson"
+version = "0.1.0"
+
+apply plugin: 'groovy'
+apply plugin: 'maven'
+
+
+def versions= [
+  webjars: '1.0.0',
+  tapestry: '5.4.1',
+  slf4j: '1.7.22',
+  
+  // test scopes
+  spock: '1.0-groovy-2.4',
+  selenium: '3.0.1'
+  
+]
+
+repositories {
+  jcenter()
+}
+
+sourceCompatibility = '1.8'
+
+task sourceJar(type: Jar) {
+  dependsOn classes
+  classifier "sources"
+  from sourceSets.main.allSource
+}
+
+artifacts {
+  archives sourceJar
+}
+
+dependencies {
+  compile "org.slf4j:slf4j-api:$versions.slf4j"
+  compile "de.eddyson:tapestry-webjars:$versions.webjars"
+  runtime "org.webjars.npm:react-select:1.0.0-rc.3"
+
+  testCompile "javax.servlet:servlet-api:2.5"
+  testCompile "org.spockframework:spock-tapestry:$versions.spock"
+  testCompile 'de.eddyson:tapestry-geb:0.31.1'
+  testCompile "org.seleniumhq.selenium:selenium-firefox-driver:$versions.selenium"
+  
+  testRuntime "org.slf4j:slf4j-simple:$versions.slf4j"
+  testRuntime 'de.eddyson:tapestry-react:0.22.0'
+}
+
+jar {
+  manifest { attributes 'Tapestry-Module-Classes': 'de.eddyson.tapestry.react.select.ReactSelectModule' }
+}
+
+tasks.withType(Test){
+  systemProperties["tapestry.service-reloading-enabled"] = "false"
+  systemProperties["tapestry.execution-mode"] = "test"
+  systemProperty 'webappLocation', 'src/test/webapp'
+  systemProperty 'jettyPort', 9040
+  enableAssertions = true
+  testLogging {
+    exceptionFormat "full"
+  }
+}
+
+task runTestApp(type:JavaExec) {
+  main = 'org.apache.tapestry5.test.Jetty7Runner'
+  args "-d", "src/test/webapp/", "-p", "9040"
+  systemProperties["tapestry.execution-mode"] = "test"
+  classpath = configurations.testRuntime + sourceSets.test.output + sourceSets.main.output
+}
+
+bintray {
+    user = 'fooberger'
+    key = System.env.bintrayAPIKey
+    configurations = ['archives']
+    publish = true
+    pkg {
+        repo = 'maven'
+        name = 'de.eddyson:tapestry-react-select'
+        licenses = ['Apache-2.0']
+        vcsUrl = 'https://github.com/eddyson-de/tapestry-react-select'
+    }
+}

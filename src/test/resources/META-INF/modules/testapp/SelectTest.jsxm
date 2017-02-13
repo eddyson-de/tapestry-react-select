@@ -1,0 +1,19 @@
+import React from "react"
+import Select from 'react-select'
+
+export default class SelectTest extends React.Component {
+
+  constructor(props){
+    super(props);  
+  }
+  
+  render(){
+    const options =  [
+      { value: 'one', label: 'One' },
+      { value: 'two', label: 'Two' }
+    ];
+    return (
+      <Select value="one" options={options} />
+    )
+  }
+}
