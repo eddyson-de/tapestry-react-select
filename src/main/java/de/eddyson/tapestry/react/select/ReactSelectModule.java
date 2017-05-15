@@ -43,7 +43,7 @@ public class ReactSelectModule {
                 .replace("window['React']", "require('react')").replace("window['ReactDOM']", "require('react-dom')")
                 .replace("window['classNames']", "require('classnames')")
                 .replace("window['AutosizeInput']", "require('react-input-autosize')")
-                .replace("define([]", "define(['react', 'react-dom', 'classnames', 'react-input-autosize']"))));
+                .replace("define([]", "define(['react', 'react-dom', 'classnames', 'react-input-autosize', 'prop-types', 'create-react-class']"))));
   }
 
   @Contribute(SymbolProvider.class)
