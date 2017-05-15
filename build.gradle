@@ -1,5 +1,6 @@
 plugins {
     id "com.jfrog.bintray" version "1.7.3"
+    id "com.moowork.node" version "1.1.0"
 }
 
 description = "Use React-Select together with Tapestry"
@@ -12,7 +13,6 @@ apply plugin: 'maven'
 
 
 def versions= [
-  webjars: '1.0.0',
   tapestry: '5.4.1',
   slf4j: '1.7.22',
   
@@ -40,9 +40,8 @@ artifacts {
 
 dependencies {
   compile "org.slf4j:slf4j-api:$versions.slf4j"
-  compile "de.eddyson:tapestry-webjars:$versions.webjars"
-  runtime "org.webjars.npm:react-select:1.0.0-rc.3"
-
+  compile "org.apache.tapestry:tapestry-core:$versions.tapestry"
+  
   testCompile "javax.servlet:servlet-api:2.5"
   testCompile "org.spockframework:spock-tapestry:$versions.spock"
   testCompile 'de.eddyson:tapestry-geb:0.31.1'
@@ -66,6 +65,22 @@ tasks.withType(Test){
     exceptionFormat "full"
   }
 }
+
+processResources {
+  dependsOn npmInstall
+  from('node_modules/react-select/dist'){
+    into 'de/eddyson/tapestry/react/select'
+  }
+  from('node_modules/react-input-autosize/dist'){
+    into 'de/eddyson/tapestry/react/select'
+  }
+  from('node_modules/classnames'){
+    into 'de/eddyson/tapestry/react/select'
+    include 'index.js'
+    rename { 'classnames.js' }
+  }
+}
+
 
 task runTestApp(type:JavaExec) {
   main = 'org.apache.tapestry5.test.Jetty7Runner'
