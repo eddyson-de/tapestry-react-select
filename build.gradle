@@ -56,6 +56,8 @@ jar {
   manifest { attributes 'Tapestry-Module-Classes': 'de.eddyson.tapestry.react.select.ReactSelectModule' }
 }
 
+node.download = true
+
 tasks.withType(Test){
   systemProperties["tapestry.service-reloading-enabled"] = "false"
   systemProperties["tapestry.execution-mode"] = "test"
