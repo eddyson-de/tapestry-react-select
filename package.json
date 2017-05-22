@@ -1,5 +1,15 @@
 {
+  "scripts": {
+    "create-bundles": "rollup -c rollup/rollup.config.react-input-autosize.js && NODE_ENV=production rollup -c rollup/rollup.config.react-input-autosize.js && rollup -c rollup/rollup.config.react-select.js && NODE_ENV=production rollup -c rollup/rollup.config.react-select.js"
+  },
   "devDependencies": {
-    "react-select": "1.0.0-rc.3"
+    "babel-preset-es2015": "6.24.1",
+    "react-select": "1.0.0-rc.3",
+    "rollup": "^0.41.6",
+    "rollup-plugin-babel": "2.7.1",
+    "rollup-plugin-commonjs": "8.0.2",
+    "rollup-plugin-node-resolve": "2.1.1",
+    "rollup-plugin-replace": "1.1.1",
+    "rollup-plugin-uglify": "1.0.2"
   }
 }

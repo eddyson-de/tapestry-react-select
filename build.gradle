@@ -6,7 +6,7 @@ plugins {
 description = "Use React-Select together with Tapestry"
 
 group = "de.eddyson"
-version = "0.1.0"
+version = "0.2.0"
 
 apply plugin: 'groovy'
 apply plugin: 'maven'
@@ -69,12 +69,19 @@ tasks.withType(Test){
   }
 }
 
-processResources {
+task createBundles(type: NpmTask) {
   dependsOn npmInstall
+  // install the express package only
+  args = ['run', 'create-bundles']
+}
+
+processResources {
+  dependsOn npmInstall, createBundles
   from('node_modules/react-select/dist'){
     into 'de/eddyson/tapestry/react/select'
+    include '*.css'
   }
-  from('node_modules/react-input-autosize/dist'){
+  from('rollup/dist'){
     into 'de/eddyson/tapestry/react/select'
   }
   from('node_modules/classnames'){
