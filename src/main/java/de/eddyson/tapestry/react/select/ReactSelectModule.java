@@ -19,9 +19,9 @@ public class ReactSelectModule {
   @Contribute(ModuleManager.class)
   public static void setupJSModules(final MappedConfiguration<String, JavaScriptModuleConfiguration> configuration,
       @Path("classpath:de/eddyson/tapestry/react/select/react-select.js") final Resource reactSelect,
-      @Path("classpath:de/eddyson/tapestry/react/select/react-select.js") final Resource reactSelectMin,
+      @Path("classpath:de/eddyson/tapestry/react/select/react-select.min.js") final Resource reactSelectMin,
       @Path("classpath:de/eddyson/tapestry/react/select/react-input-autosize.js") final Resource reactInputautoSize,
-      @Path("classpath:de/eddyson/tapestry/react/select/react-input-autosize.js") final Resource reactInputautoSizeMin,
+      @Path("classpath:de/eddyson/tapestry/react/select/react-input-autosize.min.js") final Resource reactInputautoSizeMin,
       @Path("classpath:de/eddyson/tapestry/react/select/classnames.js") final Resource classnames,
       @Symbol(ReactSelectSymbols.CONTRIBUTE_CLASSNAMES_MODULE) final boolean contributeClassnamesModule,
       @Symbol(ReactSelectSymbols.CONTRIBUTE_REACT_INPUT_AUTOSIZE_MODULE) final boolean contributeInputAutosizeModule,
