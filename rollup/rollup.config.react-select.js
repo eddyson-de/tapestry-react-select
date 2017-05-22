@@ -14,7 +14,7 @@ export default {
     resolve({
       jsnext: true,
       main: true,
-      skip: ['react', 'react-dom', 'prop-types', 'classnames', 'react-input-autosize']
+      skip: ['react', 'react-dom', 'prop-types', 'classnames', 'react-input-autosize', 'create-react-class']
     }),
     commonjs({
     }),
@@ -30,5 +30,5 @@ export default {
     (process.env.NODE_ENV === 'production' && uglify())
   ],
   dest: process.env.NODE_ENV === 'production' ? 'rollup/dist/react-select.min.js' : 'rollup/dist/react-select.js',
-  external: [ 'react', 'react-dom', 'prop-types', 'classnames', 'react-input-autosize' ],
+  external: [ 'react', 'react-dom', 'prop-types', 'classnames', 'react-input-autosize', 'create-react-class' ],
 };
