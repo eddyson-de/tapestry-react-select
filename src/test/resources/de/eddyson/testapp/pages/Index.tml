@@ -5,7 +5,7 @@
   <ul class="nav">
   
 	  <li><t:pagelink page="ReactSelectDemo">React Select Demo</t:pagelink></li>
-
+      <li><t:pagelink page="ReactSelectAsyncDemo">React Select Async Demo</t:pagelink></li>
 
   </ul>
   
