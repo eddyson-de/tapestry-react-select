@@ -2,7 +2,7 @@
 
 Use React-Select (https://github.com/JedWatson/react-select) together with Tapestry (http://tapestry.apache.org/).
 
-React-Select does not provide an AMD module (https://github.com/JedWatson/react-select/issues/270), so we wrap the distributed file during runtime.
+React-Select does not provide an AMD module (https://github.com/JedWatson/react-select/issues/270), so create our own bundle using rollup.
 
 ## Usage
 
@@ -14,7 +14,7 @@ respositories {
 }
 
 dependencies {
-  runtime 'de.eddyson:tapestry-react-select:0.1.0'
+  runtime 'de.eddyson:tapestry-react-select:0.2.2'
 }
 
 ```

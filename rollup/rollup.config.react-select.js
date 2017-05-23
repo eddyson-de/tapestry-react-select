@@ -16,15 +16,17 @@ export default {
       main: true,
       skip: ['react', 'react-dom', 'prop-types', 'classnames', 'react-input-autosize', 'create-react-class']
     }),
-    commonjs({
-    }),
     replace({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
     }),
+    commonjs({
+    }),
     babel({
       presets: [
-        ['es2015', {'modules': false}]
+        ['es2015', {'modules': false}],
+        'react'
       ],
+      plugins: ['transform-object-rest-spread'],
       exclude: 'node_modules/**' // only transpile our source code
     }),
     (process.env.NODE_ENV === 'production' && uglify())

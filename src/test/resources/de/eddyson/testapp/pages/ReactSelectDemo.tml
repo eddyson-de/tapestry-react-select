@@ -4,8 +4,10 @@
 		<div class="col-sm-12">
 			<t:alerts />
 		</div>
+    </div>
+    <div class="row">
 		<div class="col-sm-12">
 			<r:reactcomponent module="testapp/SelectTest" />
 		</div>
-	</div>
+    </div>  
 </html>
