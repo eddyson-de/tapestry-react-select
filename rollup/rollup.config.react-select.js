@@ -23,8 +23,10 @@ export default {
     }),
     babel({
       presets: [
-        ['es2015', {'modules': false}]
+        ['es2015', {'modules': false}],
+        'react'
       ],
+      plugins: ['transform-object-rest-spread'],
       exclude: 'node_modules/**' // only transpile our source code
     }),
     (process.env.NODE_ENV === 'production' && uglify())
