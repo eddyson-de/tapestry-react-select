@@ -1,0 +1,13 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_4.xsd"
+	t:type="Layout" title="React Select Async Demo" xmlns:r="tapestry-library:react">
+	<div class="row">
+		<div class="col-sm-12">
+			<t:alerts />
+		</div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <r:reactcomponent module="testapp/SelectAsyncTest" />
+      </div>
+	</div>
+</html>

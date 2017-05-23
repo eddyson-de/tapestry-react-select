@@ -1,24 +1,24 @@
 plugins {
     id "com.jfrog.bintray" version "1.7.3"
-    id "com.moowork.node" version "1.1.0"
+    id "com.moowork.node" version "1.1.1"
 }
 
 description = "Use React-Select together with Tapestry"
 
 group = "de.eddyson"
-version = "0.1.0"
+version = "0.2.2"
 
 apply plugin: 'groovy'
 apply plugin: 'maven'
 
 
 def versions= [
-  tapestry: '5.4.1',
+  tapestry: '5.4.3',
   slf4j: '1.7.22',
   
   // test scopes
-  spock: '1.0-groovy-2.4',
-  selenium: '3.0.1'
+  spock: '1.1-groovy-2.4',
+  selenium: '3.4.0'
   
 ]
 
@@ -44,16 +44,19 @@ dependencies {
   
   testCompile "javax.servlet:servlet-api:2.5"
   testCompile "org.spockframework:spock-tapestry:$versions.spock"
-  testCompile 'de.eddyson:tapestry-geb:0.31.1'
+  testCompile 'de.eddyson:tapestry-geb:0.35.0'
   testCompile "org.seleniumhq.selenium:selenium-firefox-driver:$versions.selenium"
   
   testRuntime "org.slf4j:slf4j-simple:$versions.slf4j"
-  testRuntime 'de.eddyson:tapestry-react:0.22.0'
+  testRuntime 'de.eddyson:tapestry-react:0.29.1'
+  testRuntime "org.apache.tapestry:tapestry-webresources:$versions.tapestry"
 }
 
 jar {
   manifest { attributes 'Tapestry-Module-Classes': 'de.eddyson.tapestry.react.select.ReactSelectModule' }
 }
+
+node.download = true
 
 tasks.withType(Test){
   systemProperties["tapestry.service-reloading-enabled"] = "false"
@@ -66,12 +69,19 @@ tasks.withType(Test){
   }
 }
 
-processResources {
+task createBundles(type: NpmTask) {
   dependsOn npmInstall
+  // install the express package only
+  args = ['run', 'create-bundles']
+}
+
+processResources {
+  dependsOn npmInstall, createBundles
   from('node_modules/react-select/dist'){
     into 'de/eddyson/tapestry/react/select'
+    include '*.css'
   }
-  from('node_modules/react-input-autosize/dist'){
+  from('rollup/dist'){
     into 'de/eddyson/tapestry/react/select'
   }
   from('node_modules/classnames'){
