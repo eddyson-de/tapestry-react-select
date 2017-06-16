@@ -91,6 +91,14 @@ processResources {
   }
 }
 
+processTestResources {
+  dependsOn npmInstall
+  from('node_modules/create-react-class'){
+    into 'META-INF/modules'
+    include 'create-react-class.js'
+  }
+ 
+}
 
 task runTestApp(type:JavaExec) {
   main = 'org.apache.tapestry5.test.Jetty7Runner'
