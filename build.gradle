@@ -6,7 +6,7 @@ plugins {
 description = "Use React-Select together with Tapestry"
 
 group = "de.eddyson"
-version = "0.2.2"
+version = "0.2.3"
 
 apply plugin: 'groovy'
 apply plugin: 'maven'
@@ -78,7 +78,7 @@ task createBundles(type: NpmTask) {
 processResources {
   dependsOn npmInstall, createBundles
   from('node_modules/react-select/dist'){
-    into 'de/eddyson/tapestry/react/select'
+    into 'META-INF/assets/de/eddyson/tapestry/react/select'
     include '*.css'
   }
   from('rollup/dist'){
