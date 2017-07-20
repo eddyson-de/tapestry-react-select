@@ -17,6 +17,11 @@ export default {
       skip: ['react', 'react-dom', 'prop-types', 'classnames', 'react-input-autosize']
     }),
     replace({
+      'propTypes: {': 'propTypes: process.env.NODE_ENV === \'production\' ? {} : {',
+      'Async.propTypes =': 'Async.propTypes = (process.env.NODE_ENV === \'production\') ? {} :'
+
+    }),
+    replace({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
     }),
     commonjs({

@@ -17,9 +17,16 @@ export default {
       skip: ['react', 'prop-types']
     }),
     replace({
+      'propTypes: {': 'propTypes: process.env.NODE_ENV === \'production\' ? {} : {'
+    }),
+    replace({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
     }),
     commonjs({
+    }),
+    process.env.NODE_ENV === 'production' && replace({
+      'import \'prop-types\'': '',
+      'import PropTypes': '//'
     }),
     babel({
       presets: [
