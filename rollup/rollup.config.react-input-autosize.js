@@ -6,6 +6,8 @@ import replace from 'rollup-plugin-replace';
 
 process.env.BABEL_ENV = 'distribution'
 
+const isProduction = process.env.NODE_ENV === 'production';
+
 export default {
   entry: 'rollup/react-input-autosize.js',
   format: 'amd',
@@ -24,7 +26,7 @@ export default {
     }),
     commonjs({
     }),
-    process.env.NODE_ENV === 'production' && replace({
+    isProduction && replace({
       'import \'prop-types\'': '',
       'import PropTypes': '//'
     }),
@@ -34,7 +36,7 @@ export default {
       ],
       exclude: 'node_modules/**' // only transpile our source code
     }),
-    (process.env.NODE_ENV === 'production' && uglify())
+    isProduction && uglify()
   ],
   dest: process.env.NODE_ENV === 'production' ? 'rollup/dist/react-input-autosize.min.js' : 'rollup/dist/react-input-autosize.js',
   external: [ 'react', 'prop-types' ]
