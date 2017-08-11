@@ -11,12 +11,12 @@ React-Select does not provide an AMD module (https://github.com/JedWatson/react-
 
 ### `build.gradle`:
 ```groovy
-respositories {
+repositories {
   jcenter()
 }
 
 dependencies {
-  runtime 'de.eddyson:tapestry-react-select:0.2.2'
+  runtime 'de.eddyson:tapestry-react-select:0.2.5'
 }
 
 ```

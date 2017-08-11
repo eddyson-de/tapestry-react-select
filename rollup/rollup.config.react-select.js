@@ -6,6 +6,8 @@ import replace from 'rollup-plugin-replace';
 
 process.env.BABEL_ENV = 'distribution'
 
+const isProduction = process.env.NODE_ENV === 'production';
+
 export default {
   entry: 'rollup/react-select.js',
   format: 'amd',
@@ -16,6 +18,21 @@ export default {
       main: true,
       skip: ['react', 'react-dom', 'prop-types', 'classnames', 'react-input-autosize']
     }),
+    replace({
+      'propTypes: {': 'propTypes: process.env.NODE_ENV === \'production\' ? {} : {'
+    }),
+    {
+      transform: (source,id)=>{
+        if (isProduction){
+          let transformedSource = source.replace(/\.propTypes =/g, '.propTypes = (process.env.NODE_ENV === \'production\') ? {} :');
+          transformedSource = transformedSource.replace(/var propTypes = /g, 'var propTypes = true ? null : ');
+          transformedSource = transformedSource.replace(/var stringOrNode = /g, 'var stringOrNode = true ? null : ');
+          return transformedSource;
+        } else {
+          return source;
+        }
+      }
+    },
     replace({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
     }),
@@ -29,7 +46,7 @@ export default {
       plugins: ['transform-object-rest-spread'],
       exclude: 'node_modules/**' // only transpile our source code
     }),
-    (process.env.NODE_ENV === 'production' && uglify())
+    isProduction && uglify()
   ],
   dest: process.env.NODE_ENV === 'production' ? 'rollup/dist/react-select.min.js' : 'rollup/dist/react-select.js',
   external: [ 'react', 'react-dom', 'prop-types', 'classnames', 'react-input-autosize' ],
