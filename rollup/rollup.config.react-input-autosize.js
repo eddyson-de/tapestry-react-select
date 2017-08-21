@@ -9,9 +9,12 @@ process.env.BABEL_ENV = 'distribution'
 const isProduction = process.env.NODE_ENV === 'production';
 
 export default {
-  entry: 'rollup/react-input-autosize.js',
-  format: 'amd',
-  moduleName: 'AutosizeInput',
+  name: 'AutosizeInput',
+  input: 'rollup/react-input-autosize.js',
+  output: {
+    file: process.env.NODE_ENV === 'production' ? 'rollup/dist/react-input-autosize.min.js' : 'rollup/dist/react-input-autosize.js',
+    format: 'amd'
+  },
   plugins: [
     resolve({
       jsnext: true,
@@ -38,6 +41,5 @@ export default {
     }),
     isProduction && uglify()
   ],
-  dest: process.env.NODE_ENV === 'production' ? 'rollup/dist/react-input-autosize.min.js' : 'rollup/dist/react-input-autosize.js',
   external: [ 'react', 'prop-types' ]
 };
