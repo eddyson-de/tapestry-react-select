@@ -1,0 +1,32 @@
+import React from "react"
+import Select from 'react-select'
+import ajax from 't5/core/ajax'
+import dom from 't5/core/dom'
+
+export default class App extends React.Component {
+
+  constructor(props){
+    super(props);
+  }
+  
+  getValues(input, callback){
+    if (input.length > 0){
+      ajax('providevalues', {
+        element: dom.body,
+        data: {input: input},
+        success:({json:{values}})=>{
+          callback(null, {options: values});
+        }
+      });
+    } else {
+      callback(null, []);
+    }
+
+  }
+  
+  render(){
+    return (
+      <Select.AsyncCreatable autoload={false} loadOptions={this.getValues} value="one" />
+    )
+  }
+}

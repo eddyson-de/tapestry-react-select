@@ -6,6 +6,7 @@
   
 	  <li><t:pagelink page="ReactSelectDemo">React Select Demo</t:pagelink></li>
       <li><t:pagelink page="ReactSelectAsyncDemo">React Select Async Demo</t:pagelink></li>
+      <li><t:pagelink page="ReactSelectAsyncCreatableDemo">React Select AsyncCreatable Demo</t:pagelink></li>
 
   </ul>
   
