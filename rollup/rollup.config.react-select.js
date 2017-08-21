@@ -9,9 +9,12 @@ process.env.BABEL_ENV = 'distribution'
 const isProduction = process.env.NODE_ENV === 'production';
 
 export default {
-  entry: 'rollup/react-select.js',
-  format: 'amd',
-  moduleName: 'Select',
+  name: 'Select',
+  input: 'rollup/react-select.js',
+  output: {
+    file: process.env.NODE_ENV === 'production' ? 'rollup/dist/react-select.min.js' : 'rollup/dist/react-select.js',
+    format: 'amd'
+},
   plugins: [
     resolve({
       jsnext: true,
@@ -48,6 +51,5 @@ export default {
     }),
     isProduction && uglify()
   ],
-  dest: process.env.NODE_ENV === 'production' ? 'rollup/dist/react-select.min.js' : 'rollup/dist/react-select.js',
   external: [ 'react', 'react-dom', 'prop-types', 'classnames', 'react-input-autosize' ],
 };
