@@ -1,4 +1,4 @@
-# tapestry-react-select [![Build Status](https://travis-ci.org/eddyson-de/tapestry-react-select.svg?branch=master)](https://travis-ci.org/eddyson-de/tapestry-react)
+# tapestry-react-select [![Build Status](https://travis-ci.org/eddyson-de/tapestry-react-select.svg?branch=master)](https://travis-ci.org/eddyson-de/tapestry-react-select)
 
 [![Greenkeeper badge](https://badges.greenkeeper.io/eddyson-de/tapestry-react-select.svg)](https://greenkeeper.io/)
 
@@ -16,7 +16,7 @@ repositories {
 }
 
 dependencies {
-  runtime 'de.eddyson:tapestry-react-select:0.2.5'
+  runtime 'de.eddyson:tapestry-react-select:0.2.6'
 }
 
 ```

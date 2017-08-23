@@ -6,7 +6,7 @@ plugins {
 description = "Use React-Select together with Tapestry"
 
 group = "de.eddyson"
-version = "0.2.5"
+version = "0.2.6"
 
 apply plugin: 'groovy'
 apply plugin: 'maven'
@@ -18,7 +18,7 @@ def versions= [
   
   // test scopes
   spock: '1.1-groovy-2.4',
-  selenium: '3.5.1'
+  selenium: '3.5.2'
   
 ]
 
@@ -44,8 +44,10 @@ dependencies {
   
   testCompile "javax.servlet:servlet-api:2.5"
   testCompile "org.spockframework:spock-tapestry:$versions.spock"
-  testCompile 'de.eddyson:tapestry-geb:0.37.0'
+  testCompile 'de.eddyson:tapestry-geb:0.37.1'
   testCompile "org.seleniumhq.selenium:selenium-firefox-driver:$versions.selenium"
+  testCompile "org.seleniumhq.selenium:selenium-chrome-driver:$versions.selenium"
+  testCompile "io.github.bonigarcia:webdrivermanager:1.7.1"
   
   testRuntime "org.slf4j:slf4j-simple:$versions.slf4j"
   testRuntime 'de.eddyson:tapestry-react:0.30.2'
@@ -67,6 +69,10 @@ tasks.withType(Test){
   testLogging {
     exceptionFormat "full"
   }
+}
+
+test {
+  systemProperty "geb.env", System.getProperty("geb.env") ?: 'firefox'
 }
 
 task createBundles(type: NpmTask) {
