@@ -46,6 +46,7 @@ dependencies {
   testCompile "org.spockframework:spock-tapestry:$versions.spock"
   testCompile 'de.eddyson:tapestry-geb:0.37.1'
   testCompile "org.seleniumhq.selenium:selenium-firefox-driver:$versions.selenium"
+  testCompile "org.seleniumhq.selenium:selenium-chrome-driver:$versions.selenium"
   
   testRuntime "org.slf4j:slf4j-simple:$versions.slf4j"
   testRuntime 'de.eddyson:tapestry-react:0.30.2'
@@ -67,6 +68,10 @@ tasks.withType(Test){
   testLogging {
     exceptionFormat "full"
   }
+}
+
+test {
+  systemProperty "geb.env", System.getProperty("geb.env") ?: 'firefox'
 }
 
 task createBundles(type: NpmTask) {
