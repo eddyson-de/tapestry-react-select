@@ -8,7 +8,7 @@ import org.apache.tapestry5.json.JSONObject;
 
 import de.eddyson.tapestry.react.select.ReactSelectConstants;
 
-@Import(module = { "testapp/SelectAsyncTest" }, stylesheet = ReactSelectConstants.REACT_SELECT_STYLESHEET)
+@Import(module = { "testapp/SelectAsyncCreatableTest" }, stylesheet = ReactSelectConstants.REACT_SELECT_STYLESHEET)
 public class ReactSelectAsyncCreatableDemo {
 
   @PublishEvent
