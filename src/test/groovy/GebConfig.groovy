@@ -3,12 +3,15 @@ import org.openqa.selenium.chrome.ChromeOptions
 import org.openqa.selenium.firefox.FirefoxDriver
 import org.openqa.selenium.remote.DesiredCapabilities
 
+import io.github.bonigarcia.wdm.ChromeDriverManager
+
 reportsDir = 'build/reports/geb'
 baseUrl = "http://localhost:${System.properties['jettyPort']}/"
 
 environments {
   'chrome-headless' {
     driver = {
+      ChromeDriverManager.getInstance().setup()
       ChromeOptions options = new ChromeOptions()
       options.addArguments('headless')
       options.addArguments('disable-gpu') // https://developers.google.com/web/updates/2017/04/headless-chrome
