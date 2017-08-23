@@ -5,6 +5,9 @@ jdk:
 
 sudo: false
 
+addons:
+  firefox: "latest-esr"
+
 cache:
   directories:
   - $HOME/.gradle
