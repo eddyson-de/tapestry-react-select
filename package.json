@@ -8,7 +8,7 @@
     "babel-preset-es2015": "6.24.1",
     "babel-preset-react": "6.24.1",
     "react-select": "1.0.0-rc.3",
-    "rollup": "0.49.2",
+    "rollup": "0.49.3",
     "rollup-plugin-babel": "3.0.2",
     "rollup-plugin-commonjs": "8.2.0",
     "rollup-plugin-node-resolve": "2.1.1",
