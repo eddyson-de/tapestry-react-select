@@ -17,7 +17,7 @@ export default {
 },
   plugins: [
     resolve({
-      jsnext: true,
+      jsnext: false,
       main: true,
       skip: ['react', 'react-dom', 'prop-types', 'classnames', 'react-input-autosize']
     }),
