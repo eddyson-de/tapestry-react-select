@@ -7,6 +7,12 @@ export default class App extends React.Component {
 
   constructor(props){
     super(props);
+    this.state = {value : 'one'};
+    this.setValue = this.setValue.bind(this);
+  }
+  
+  setValue(value){
+    this.setState(() => { return {value: value} });
   }
   
   getValues(input, callback){
@@ -26,7 +32,7 @@ export default class App extends React.Component {
   
   render(){
     return (
-      <Select.AsyncCreatable autoload={false} loadOptions={this.getValues} value="one" />
+      <Select.AsyncCreatable value={this.state.value} onChange={this.setValue} autoload={false} loadOptions={this.getValues} />
     )
   }
 }
