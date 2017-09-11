@@ -17,32 +17,22 @@ export default {
 },
   plugins: [
     resolve({
-      jsnext: true,
+      jsnext: false,
       main: true,
       skip: ['react', 'react-dom', 'prop-types', 'classnames', 'react-input-autosize']
     }),
     replace({
       'propTypes: {': 'propTypes: process.env.NODE_ENV === \'production\' ? {} : {'
     }),
-    
     {
       transform: (source,id)=>{
-        let transformedSource = source;
-
-        // work around https://github.com/rollup/rollup-plugin-commonjs/issues/105,
-        // https://github.com/JedWatson/react-select/issues/1517,
-        // https://github.com/JedWatson/react-select/pull/1741
-        if(id[0] === '/' && (id.endsWith('AsyncCreatable.js')||id.endsWith('Async.js'))){
-          transformedSource = transformedSource.replace(/_Select2\['default'\]/g, "require('./Select')");
-        }
-        
         if (isProduction){
-          transformedSource = transformedSource.replace(/\.propTypes =/g, '.propTypes = (process.env.NODE_ENV === \'production\') ? {} :');
+          let transformedSource = source.replace(/\.propTypes =/g, '.propTypes = (process.env.NODE_ENV === \'production\') ? {} :');
           transformedSource = transformedSource.replace(/var propTypes = /g, 'var propTypes = true ? null : ');
           transformedSource = transformedSource.replace(/var stringOrNode = /g, 'var stringOrNode = true ? null : ');
           return transformedSource;
         } else {
-          return transformedSource;
+          return source;
         }
       }
     },
