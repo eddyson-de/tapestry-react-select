@@ -1,10 +1,7 @@
-# tapestry-react-select [![Build Status](https://travis-ci.org/eddyson-de/tapestry-react-select.svg?branch=master)](https://travis-ci.org/eddyson-de/tapestry-react-select)
+# tapestry-react-select [![Build Status](https://travis-ci.org/eddyson-de/tapestry-react-select.svg?branch=master)](https://travis-ci.org/eddyson-de/tapestry-react-select) [![Greenkeeper badge](https://badges.greenkeeper.io/eddyson-de/tapestry-react-select.svg)](https://greenkeeper.io/)
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/eddyson-de/tapestry-react-select.svg)](https://greenkeeper.io/)
-
-Use React-Select (https://github.com/JedWatson/react-select) together with Tapestry (http://tapestry.apache.org/).
-
-React-Select does not provide an AMD module (https://github.com/JedWatson/react-select/issues/270), so create our own bundle using rollup.
+# Notice
+This library is obsolete. It was originally created because `react-select` did not provide a proper AMD module. This has been addressed in `react-select v1.0.0-rc.6`, so the regular distribution can now be used with Tapestry. 
 
 ## Usage
 
@@ -16,7 +13,7 @@ repositories {
 }
 
 dependencies {
-  runtime 'de.eddyson:tapestry-react-select:0.2.6'
+  runtime 'de.eddyson:tapestry-react-select:0.2.7'
 }
 
 ```
